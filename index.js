@@ -38,10 +38,19 @@ function createItem(item)
 
         let items = getTasksFromDOM();
         saveTasks(items);
-    })
+    });
 
+    duplicateButton.addEventListener("click", (event) =>
+    {
+        let itemName = textElement.textContent;
+        let newItem = createItem(item);
+
+        listElement.prepend(newItem);
+
+        let items = getTasksFromDOM();
+        saveTasks(items);
+    });
     return clone;
-
 }
 
 function getTasksFromDOM()
@@ -53,8 +62,7 @@ function getTasksFromDOM()
     itemsNamesElements.forEach(item =>
     {
         tasks.push(item.textContent);
-    })
-
+    });
     return tasks;
 }
 
@@ -69,7 +77,7 @@ items = loadTasks();
 items.forEach(item =>
 {
     listElement.append(createItem(item));
-})
+});
 
 formElement.addEventListener("submit", (event) =>
 {
