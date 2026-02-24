@@ -11,10 +11,9 @@ const listElement = document.querySelector(".to-do__list");
 const formElement = document.querySelector(".to-do__form");
 const inputElement = document.querySelector(".to-do__input");
 
-//test
 
 function loadTasks() {
-
+    return items;
 }
 
 function createItem(item) {
@@ -25,6 +24,10 @@ function createItem(item) {
   const duplicateButton = clone.querySelector(".to-do__item-button_type_duplicate");
   const editButton = clone.querySelector(".to-do__item-button_type_edit");
 
+  textElement.textContent = item;
+
+  return clone;
+
 }
 
 function getTasksFromDOM() {
@@ -34,4 +37,11 @@ function getTasksFromDOM() {
 function saveTasks(tasks) {
 
 }
+
+
+items = loadTasks();
+
+items.forEach(item => {
+    listElement.append(createItem(item));
+})
 
