@@ -18,6 +18,7 @@ function loadTasks()
     {
         items = JSON.parse(localStorage.getItem("tasks"));
     }
+
     return items;
 }
 
@@ -32,15 +33,15 @@ function createItem(item)
 
     textElement.textContent = item;
 
-    deleteButton.addEventListener("click", (event) =>
+    deleteButton.addEventListener("click", () =>
     {
-        clone.remove(event.target);
+        clone.remove();
 
         let items = getTasksFromDOM();
         saveTasks(items);
     });
 
-    duplicateButton.addEventListener("click", (event) =>
+    duplicateButton.addEventListener("click", () =>
     {
         let itemName = textElement.textContent;
         let newItem = createItem(itemName);
@@ -50,6 +51,21 @@ function createItem(item)
         let items = getTasksFromDOM();
         saveTasks(items);
     });
+
+    editButton.addEventListener("click", () =>
+    {
+        textElement.setAttribute("contenteditable", true);
+        textElement.focus();
+    });
+
+    textElement.addEventListener("blur", () =>
+    {
+        textElement.setAttribute("contenteditable", false);
+
+        let items = getTasksFromDOM();
+        saveTasks(items);
+    });
+
     return clone;
 }
 
@@ -63,6 +79,7 @@ function getTasksFromDOM()
     {
         tasks.push(item.textContent);
     });
+
     return tasks;
 }
 
